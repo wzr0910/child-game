@@ -12,6 +12,7 @@ import { usePathname } from "next/navigation";
 
 const LINKS = [
   { href: "/", label: "首页" },
+  { href: "/intro", label: "介绍" },
   { href: "/chat", label: "对话" },
   { href: "/gallery", label: "我的宣言" },
   { href: "/about", label: "关于" },
