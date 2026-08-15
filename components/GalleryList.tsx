@@ -86,13 +86,13 @@ export function GalleryList() {
     return (
       <div className="surface-card p-10 sm:p-14 text-center">
         <div className="text-4xl mb-4">🌱</div>
-        <h2 className="text-lg font-bold mb-2">这里还什么都没有</h2>
+        <h2 className="text-lg font-serif mb-2">这里还什么都没有</h2>
         <p className="text-sm text-ink/60 leading-relaxed mb-8">
           走完一次 3 轮对话，生成的宣言会自动收藏到这里。
         </p>
         <Link
           href="/chat"
-          className="inline-block px-8 py-3 bg-ink text-parchment rounded-full hover:scale-105 transition-transform"
+          className="btn-primary"
         >
           去生成第一份宣言 →
         </Link>
@@ -114,19 +114,19 @@ export function GalleryList() {
             <div className="flex flex-wrap gap-2 justify-end text-xs">
               <button
                 onClick={() => void handleCopy(item)}
-                className="px-3 py-1.5 rounded-lg border border-ink/15 hover:bg-ink hover:text-parchment transition-colors"
+                className="px-3 py-1.5 rounded-none border border-ink/15 hover:bg-ink hover:text-paper transition-colors"
               >
                 复制文字
               </button>
               <button
                 onClick={() => handleDownload(item)}
-                className="px-3 py-1.5 rounded-lg border border-ink/15 hover:bg-ink hover:text-parchment transition-colors"
+                className="px-3 py-1.5 rounded-none border border-ink/15 hover:bg-ink hover:text-paper transition-colors"
               >
                 存成图片
               </button>
               <button
                 onClick={() => setPendingDeleteId(item.id)}
-                className="px-3 py-1.5 rounded-lg border border-red-200 text-red-700 hover:bg-red-800 hover:text-parchment hover:border-red-800 transition-colors"
+                className="px-3 py-1.5 rounded-none border border-ink/15 hover:bg-ink hover:text-paper transition-colors"
               >
                 删除
               </button>

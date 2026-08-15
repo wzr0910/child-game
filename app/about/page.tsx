@@ -54,7 +54,7 @@ export default function AboutPage() {
   return (
     <main className="px-4 py-8 sm:py-12">
       <div className="max-w-2xl mx-auto">
-        <h1 className="text-2xl sm:text-3xl font-bold text-center mb-2">
+        <h1 className="text-2xl sm:text-3xl font-serif text-center mb-2">
           关于本项目
         </h1>
         <p className="text-center text-ink/60 mb-10 text-sm sm:text-base">
@@ -93,7 +93,7 @@ export default function AboutPage() {
               <details key={item.title} className="surface-card group">
                 <summary className="cursor-pointer list-none p-5 flex items-start justify-between gap-4 font-semibold">
                   <span>{item.title}</span>
-                  <span className="text-clay shrink-0 transition-transform group-open:rotate-45">
+                  <span className="text-ink/60 shrink-0 transition-transform group-open:rotate-45">
                     +
                   </span>
                 </summary>
@@ -142,7 +142,7 @@ export default function AboutPage() {
         <div className="text-center">
           <Link
             href="/chat"
-            className="inline-block px-10 py-3.5 bg-ink text-parchment rounded-full hover:scale-105 transition-transform shadow-lg"
+            className="btn-primary"
           >
             开始一次对话 →
           </Link>

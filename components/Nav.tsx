@@ -22,7 +22,7 @@ export function Nav() {
   const pathname = usePathname();
 
   return (
-    <header className="sticky top-0 z-40 border-b border-ink/10 bg-paper/80 backdrop-blur-md">
+    <header className="sticky top-0 z-40 border-b border-ink/15 bg-paper">
       <nav className="max-w-5xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between gap-4">
         <Link
           href="/"
@@ -30,7 +30,7 @@ export function Nav() {
         >
           <svg
             viewBox="0 0 24 24"
-            className="w-5 h-5 text-clay"
+            className="w-5 h-5 text-ink"
             fill="none"
             aria-hidden="true"
           >
@@ -55,9 +55,9 @@ export function Nav() {
                 <Link
                   href={link.href}
                   aria-current={active ? "page" : undefined}
-                  className={`px-2.5 sm:px-3 py-1.5 rounded-lg transition-colors ${
+                  className={`px-2.5 sm:px-3 py-1.5 rounded-none transition-colors ${
                     active
-                      ? "bg-ink text-parchment"
+                      ? "bg-ink text-paper"
                       : "text-ink/60 hover:text-ink hover:bg-ink/5"
                   }`}
                 >

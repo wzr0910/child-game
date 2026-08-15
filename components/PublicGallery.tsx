@@ -46,7 +46,7 @@ export function PublicGallery() {
     return (
       <div className="surface-card p-10 sm:p-14 text-center">
         <div className="text-4xl mb-4">🌍</div>
-        <h3 className="text-lg font-bold mb-2">公共画廊还没开放</h3>
+        <h3 className="text-lg font-serif mb-2">公共画廊还没开放</h3>
         <p className="text-sm text-ink/60 leading-relaxed">
           接入数据库后，这里会展示所有人生成的孩子宣言。
           <br />
@@ -70,7 +70,7 @@ export function PublicGallery() {
     return (
       <div className="surface-card p-10 sm:p-14 text-center">
         <div className="text-4xl mb-4">🌱</div>
-        <h3 className="text-lg font-bold mb-2">还没有人点亮这里</h3>
+        <h3 className="text-lg font-serif mb-2">还没有人点亮这里</h3>
         <p className="text-sm text-ink/60 leading-relaxed">
           生成一份宣言并公开，就会成为公共画廊的第一颗星。
         </p>

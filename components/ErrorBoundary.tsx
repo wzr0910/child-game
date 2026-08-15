@@ -41,9 +41,9 @@ export class ErrorBoundary extends Component<Props, State> {
     if (!this.state.hasError) return this.props.children;
 
     return (
-      <div className="bg-white/60 backdrop-blur-sm rounded-2xl border border-ink/10 p-10 text-center">
+      <div className="bg-paper rounded-none border border-ink/15 p-10 text-center">
         <div className="text-4xl mb-4">🌫️</div>
-        <h3 className="text-lg font-bold mb-2">
+        <h3 className="text-lg font-serif mb-2">
           {this.props.fallbackTitle || "山上起雾了"}
         </h3>
         <p className="text-sm text-ink/60 mb-6 leading-relaxed">

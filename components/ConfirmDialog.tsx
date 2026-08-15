@@ -53,17 +53,17 @@ export function ConfirmDialog({
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center px-4 bg-ink/40 backdrop-blur-sm animate-fade-in"
+      className="fixed inset-0 z-50 flex items-center justify-center px-4 bg-ink/40 animate-fade-in"
       role="dialog"
       aria-modal="true"
       aria-labelledby="confirm-title"
       onClick={onCancel}
     >
       <div
-        className="w-full max-w-sm bg-parchment rounded-2xl border border-ink/10 shadow-2xl p-6 animate-scale-in"
+        className="w-full max-w-sm bg-paper rounded-none border border-ink/15 p-6 animate-scale-in"
         onClick={(e) => e.stopPropagation()}
       >
-        <h3 id="confirm-title" className="text-lg font-bold mb-2">
+        <h3 id="confirm-title" className="font-serif text-lg mb-2">
           {title}
         </h3>
         {description && (
@@ -77,9 +77,9 @@ export function ConfirmDialog({
           </button>
           <button
             onClick={onConfirm}
-            className={`flex-1 !py-2.5 rounded-lg transition-all text-parchment ${
+            className={`flex-1 !py-2.5 rounded-none transition-colors text-paper ${
               danger
-                ? "bg-red-800 hover:bg-red-900"
+                ? "bg-ink hover:bg-ink/90"
                 : "bg-ink hover:bg-ink/90"
             }`}
           >

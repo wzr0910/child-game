@@ -39,7 +39,7 @@ export default function IntroPage() {
   return (
     <main className="px-4 py-8 sm:py-12">
       <div className="max-w-2xl mx-auto">
-        <h1 className="text-3xl sm:text-4xl font-bold text-center mb-3">
+        <h1 className="text-3xl sm:text-4xl font-serif text-center mb-3">
           项目介绍
         </h1>
         <p className="text-center text-ink/50 mb-10 text-sm">
@@ -83,10 +83,10 @@ export default function IntroPage() {
           <ol className="grid grid-cols-2 gap-4">
             {STEPS.map((item) => (
               <li key={item.step} className="surface-card p-5 text-center">
-                <div className="text-clay text-xs tracking-widest mb-3">
+                <div className="text-ink/40 text-xs tracking-widest mb-3">
                   {item.step}
                 </div>
-                <div className="font-bold mb-1">{item.title}</div>
+                <div className="font-serif mb-1">{item.title}</div>
                 <div className="text-xs text-ink/50 leading-relaxed">
                   {item.desc}
                 </div>
@@ -139,7 +139,7 @@ export default function IntroPage() {
         <div className="text-center space-y-3">
           <Link
             href="/chat"
-            className="inline-block px-10 py-3.5 bg-ink text-parchment rounded-full hover:scale-105 transition-transform shadow-lg"
+            className="btn-primary"
           >
             开始一次对话 →
           </Link>

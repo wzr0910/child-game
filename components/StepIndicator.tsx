@@ -45,8 +45,8 @@ export function StepIndicator({ currentStep }: StepIndicatorProps) {
             }`}
           >
             <div
-              className={`w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center mb-1 transition-colors ${
-                reached ? "bg-clay text-parchment" : "bg-ink/10"
+              className={`w-7 h-7 sm:w-8 sm:h-8 rounded-none flex items-center justify-center mb-1 transition-colors ${
+                reached ? "bg-ink text-paper" : "bg-ink/10"
               }`}
             >
               {done ? "✓" : step.id + 1}

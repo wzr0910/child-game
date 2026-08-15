@@ -19,12 +19,12 @@ export default function Home() {
   return (
     <main className="px-6">
       {/* Hero */}
-      <section className="max-w-3xl mx-auto text-center pt-24 pb-20">
-        <p className="text-clay tracking-[0.25em] text-xs sm:text-sm mb-6 uppercase">
+      <section className="max-w-3xl mx-auto text-center pt-28 pb-24 md:pt-36 md:pb-28">
+        <p className="text-ink/50 tracking-[0.25em] text-xs sm:text-sm mb-6 uppercase">
           Friedrich Nietzsche · Also sprach Zarathustra
         </p>
 
-        <h1 className="text-5xl md:text-7xl font-semibold tracking-tight mb-8">
+        <h1 className="text-5xl md:text-7xl font-serif font-normal tracking-tight mb-8">
           孩子的游戏
         </h1>
 
@@ -59,10 +59,10 @@ export default function Home() {
         <ol className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {FLOW.map((item) => (
             <li key={item.step} className="surface-card p-5 text-center">
-              <div className="text-clay text-xs tracking-widest mb-3">
+              <div className="text-ink/40 text-xs tracking-widest mb-3">
                 {item.step}
               </div>
-              <div className="font-semibold mb-1">{item.title}</div>
+              <div className="font-serif mb-1">{item.title}</div>
               <div className="text-xs text-ink/50 leading-relaxed">
                 {item.desc}
               </div>
@@ -74,26 +74,26 @@ export default function Home() {
       {/* 差异化主张 */}
       <section className="max-w-3xl mx-auto pb-24">
         <div className="surface-card p-6 sm:p-8">
-          <h2 className="font-semibold text-lg mb-5">这不是又一个测评工具</h2>
+          <h2 className="font-serif text-xl mb-5">这不是又一个测评工具</h2>
           <ul className="space-y-3 text-sm text-ink/70 leading-relaxed">
             <li className="flex gap-3">
-              <span className="text-clay shrink-0">×</span>
+              <span className="text-ink/60 shrink-0">×</span>
               <span>
                 不给你贴标签，不告诉你「你是 INFP，适合做××」
               </span>
             </li>
             <li className="flex gap-3">
-              <span className="text-clay shrink-0">×</span>
+              <span className="text-ink/60 shrink-0">×</span>
               <span>不做诊断，不给人生建议，也不替代心理咨询</span>
             </li>
             <li className="flex gap-3">
-              <span className="text-clay shrink-0">○</span>
+              <span className="text-ink/60 shrink-0">○</span>
               <span>
                 只做一件事：帮你把已经发生过的那个瞬间，重新看见一次
               </span>
             </li>
             <li className="flex gap-3">
-              <span className="text-clay shrink-0">○</span>
+              <span className="text-ink/60 shrink-0">○</span>
               <span>
                 最终的宣言由你自己挑选、自己修改、自己命名——那是你的话，不是 AI 的话
               </span>

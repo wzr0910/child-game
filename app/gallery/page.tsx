@@ -12,7 +12,7 @@ export default function GalleryPage() {
   return (
     <main className="px-4 py-8 sm:py-12">
       <div className="max-w-2xl mx-auto">
-        <h1 className="text-2xl sm:text-3xl font-bold text-center mb-2">
+        <h1 className="text-2xl sm:text-3xl font-serif text-center mb-2">
           宣言画廊
         </h1>
         <p className="text-center text-ink/60 mb-8 text-sm sm:text-base">

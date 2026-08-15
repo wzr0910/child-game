@@ -21,9 +21,9 @@ type CandidateSelectorProps = {
 };
 
 const STYLE_BADGE: Record<string, string> = {
-  "激情": "bg-red-100 text-red-700 border-red-200",
-  "诗意": "bg-blue-100 text-blue-700 border-blue-200",
-  "简洁": "bg-amber-100 text-amber-700 border-amber-200",
+  "激情": "bg-ink/5 text-ink/70 border-ink/20",
+  "诗意": "bg-ink/5 text-ink/70 border-ink/20",
+  "简洁": "bg-ink/5 text-ink/70 border-ink/20",
 };
 
 export function CandidateSelector({
@@ -37,7 +37,7 @@ export function CandidateSelector({
   return (
     <div className="space-y-4">
       <div className="text-center mb-6">
-        <h3 className="text-xl font-bold mb-2">✨ 选择你最有感觉的一句</h3>
+        <h3 className="font-serif text-xl mb-2">✨ 选择你最有感觉的一句</h3>
         <p className="text-sm text-ink/60">
           点击卡片选中，你也可以直接编辑文字
         </p>
@@ -50,22 +50,22 @@ export function CandidateSelector({
             <div
               key={c.id}
               onClick={() => onSelect(c.id)}
-              className={`p-5 rounded-xl border-2 cursor-pointer transition-all ${
+              className={`p-5 rounded-none border cursor-pointer transition-colors ${
                 isSelected
-                  ? "border-clay bg-clay/5 shadow-md"
-                  : "border-ink/10 bg-white/60 hover:border-ink/30"
+                  ? "border-ink bg-ink/[0.03]"
+                  : "border-ink/15 bg-transparent hover:border-ink/40"
               }`}
             >
               <div className="flex items-center justify-between mb-3">
                 <span
-                  className={`text-xs px-2 py-1 rounded-full border ${
-                    STYLE_BADGE[c.style] || "bg-gray-100 text-gray-700"
+                  className={`text-xs px-2 py-1 rounded-none border ${
+                    STYLE_BADGE[c.style] || "bg-ink/5 text-ink/70 border-ink/20"
                   }`}
                 >
                   {c.style}版
                 </span>
                 {isSelected && (
-                  <span className="text-xs text-clay font-semibold">
+                  <span className="text-xs text-ink font-semibold">
                     ✓ 已选中
                   </span>
                 )}
@@ -76,7 +76,7 @@ export function CandidateSelector({
                   onChange={(e) => onEdit(e.target.value)}
                   onClick={(e) => e.stopPropagation()}
                   rows={6}
-                  className="w-full p-3 bg-white/80 border border-ink/20 rounded-lg focus:outline-none focus:border-clay resize-none leading-relaxed"
+                  className="w-full p-3 bg-transparent border border-ink/20 rounded-none focus:outline-none focus:border-ink resize-none leading-relaxed"
                 />
               ) : (
                 <p className="text-ink/80 leading-relaxed whitespace-pre-wrap">

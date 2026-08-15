@@ -29,32 +29,32 @@ const STYLE_CONFIG: Record<
   { container: string; title: string; meta: string; text: string; badge: string }
 > = {
   minimal: {
-    container: "bg-white text-ink border-2 border-ink",
-    title: "text-2xl font-bold text-ink",
+    container: "bg-paper text-ink border border-ink",
+    title: "text-2xl font-serif text-ink",
     meta: "text-ink/50",
     text: "text-ink/80 leading-relaxed",
-    badge: "bg-ink text-white",
+    badge: "bg-ink text-paper",
   },
   classical: {
-    container: "bg-parchment text-ink border-4 border-double border-clay shadow-2xl",
-    title: "text-2xl font-bold text-clay italic font-serif",
-    meta: "text-clay/70",
+    container: "bg-paper text-ink border border-double border-ink",
+    title: "text-2xl font-serif text-ink italic",
+    meta: "text-ink/50",
     text: "text-ink leading-loose italic",
-    badge: "bg-clay text-parchment",
+    badge: "bg-ink text-paper",
   },
   futuristic: {
-    container: "bg-ink text-parchment border-2 border-clay shadow-2xl",
-    title: "text-2xl font-bold text-clay",
-    meta: "text-parchment/60",
-    text: "text-parchment/90 leading-relaxed",
-    badge: "bg-clay text-ink",
+    container: "bg-ink text-paper border border-ink",
+    title: "text-2xl font-serif text-paper",
+    meta: "text-paper/60",
+    text: "text-paper/90 leading-relaxed",
+    badge: "bg-paper text-ink",
   },
   handwritten: {
-    container: "bg-sage/10 text-ink border-2 border-dashed border-sage shadow-lg",
-    title: "text-2xl font-bold text-sage",
+    container: "bg-ink/[0.03] text-ink border border-dashed border-ink/40",
+    title: "text-2xl font-serif text-ink",
     meta: "text-ink/50",
     text: "text-ink leading-loose",
-    badge: "bg-sage text-white",
+    badge: "bg-ink text-paper",
   },
 };
 
@@ -68,10 +68,10 @@ export function DeclarationCard({
   const date = new Date(createdAt ?? Date.now()).toLocaleDateString("zh-CN");
 
   return (
-    <div className={`p-6 sm:p-8 rounded-2xl ${config.container}`}>
+    <div className={`p-6 sm:p-8 rounded-none ${config.container}`}>
       {/* 顶部装饰 */}
       <div className="flex items-center justify-between mb-6">
-        <span className={`text-xs px-3 py-1 rounded-full ${config.badge}`}>
+        <span className={`text-xs px-3 py-1 rounded-none ${config.badge}`}>
           🌀 孩子的游戏
         </span>
         <span className={`text-xs ${config.meta}`}>{date}</span>

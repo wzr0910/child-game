@@ -34,9 +34,9 @@ type ToastContextValue = {
 const ToastContext = createContext<ToastContextValue | null>(null);
 
 const KIND_STYLE: Record<ToastKind, string> = {
-  success: "bg-ink text-parchment border-clay/40",
-  error: "bg-red-900 text-parchment border-red-400/40",
-  info: "bg-ink/90 text-parchment border-ink/40",
+  success: "bg-ink text-paper border-ink/20",
+  error: "bg-ink text-paper border-ink/20",
+  info: "bg-ink/90 text-paper border-ink/20",
 };
 
 const KIND_ICON: Record<ToastKind, string> = {
@@ -71,11 +71,11 @@ export function ToastProvider({ children }: { children: ReactNode }) {
         {items.map((item) => (
           <div
             key={item.id}
-            className={`animate-toast-in flex items-center gap-3 w-full px-5 py-3 rounded-xl border shadow-lg text-sm ${
+            className={`animate-toast-in flex items-center gap-3 w-full px-5 py-3 rounded-none border shadow-none text-sm ${
               KIND_STYLE[item.kind]
             }`}
           >
-            <span className="shrink-0 w-5 h-5 rounded-full bg-white/15 flex items-center justify-center text-xs">
+            <span className="shrink-0 w-5 h-5 rounded-none bg-white/15 flex items-center justify-center text-xs">
               {KIND_ICON[item.kind]}
             </span>
             <span className="whitespace-pre-wrap leading-relaxed">

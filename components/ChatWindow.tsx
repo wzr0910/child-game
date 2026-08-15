@@ -354,10 +354,10 @@ export function ChatWindow() {
 
   return (
     <>
-      <div className="bg-surface rounded-3xl border border-ink/10 shadow-soft overflow-hidden">
+      <div className="bg-surface border border-ink/15 rounded-none overflow-hidden">
         {/* 演示模式提示 */}
         {isDemo && (
-          <div className="flex items-center justify-center gap-2 px-4 py-2.5 bg-clay/[0.06] border-b border-clay/25 text-sm text-ink/80">
+          <div className="flex items-center justify-center gap-2 px-4 py-2.5 bg-ink/[0.03] border-b border-ink/15 text-sm text-ink/80">
             <span className="demo-badge">演示模式</span>
             <span>当前展示的是预置回复，填入密钥即可切换真实 AI</span>
           </div>
@@ -407,9 +407,9 @@ export function ChatWindow() {
                 <div className="flex items-center gap-2 text-ink/50 italic text-sm">
                   <span>查拉图斯特拉在沉思</span>
                   <span className="flex gap-1">
-                    <span className="animate-dot w-1 h-1 rounded-full bg-ink/40" />
-                    <span className="animate-dot animation-delay-150 w-1 h-1 rounded-full bg-ink/40" />
-                    <span className="animate-dot animation-delay-300 w-1 h-1 rounded-full bg-ink/40" />
+                    <span className="animate-dot w-1 h-1 rounded-none bg-ink/40" />
+                    <span className="animate-dot animation-delay-150 w-1 h-1 rounded-none bg-ink/40" />
+                    <span className="animate-dot animation-delay-300 w-1 h-1 rounded-none bg-ink/40" />
                   </span>
                 </div>
               )}

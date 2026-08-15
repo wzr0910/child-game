@@ -3,7 +3,7 @@
  *
  * 为什么自己用 Canvas 画，而不是引 html-to-image / html2canvas：
  * 1. 零新增依赖，打包体积不涨
- * 2. 那类库对 Tailwind 的 backdrop-blur、CSS 变量支持不稳，容易糊
+ * 2. 那类库对背景模糊与 CSS 变量的支持不稳，导出的图容易糊
  * 3. 分享图的尺寸和排版需要独立于网页布局（1080×1350 是小红书竖图比例）
  *
  * 传播闭环的最后一环：用户能把宣言存成图，才谈得上"愿意晒"。
@@ -28,37 +28,37 @@ type Palette = {
 const PALETTES: Record<CardStyleId, Palette> = {
   minimal: {
     background: "#ffffff",
-    border: "#1a1a1a",
+    border: "#1C1C1C",
     borderWidth: 4,
     borderDashed: false,
-    title: "#1a1a1a",
+    title: "#1C1C1C",
     body: "#333333",
     meta: "#8a8a8a",
   },
   classical: {
     background: "#f5f1e8",
-    border: "#b8860b",
+    border: "#1C1C1C",
     borderWidth: 8,
     borderDashed: false,
-    title: "#b8860b",
+    title: "#1C1C1C",
     body: "#1a1a1a",
-    meta: "#a98b3d",
+    meta: "#8a8a8a",
   },
   futuristic: {
-    background: "#1a1a1a",
-    border: "#b8860b",
-    borderWidth: 4,
+    background: "#1C1C1C",
+    border: "#F9F8F6",
+    borderWidth: 3,
     borderDashed: false,
-    title: "#b8860b",
+    title: "#F9F8F6",
     body: "#e8e4da",
     meta: "#9a9488",
   },
   handwritten: {
-    background: "#f2f5ee",
-    border: "#9caf88",
+    background: "#f3f1ec",
+    border: "#1C1C1C",
     borderWidth: 4,
     borderDashed: true,
-    title: "#7d9068",
+    title: "#1C1C1C",
     body: "#1a1a1a",
     meta: "#8a8a8a",
   },

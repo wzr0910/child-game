@@ -12,15 +12,15 @@
   }
 
   body {
-    background-color: #f4f1ea; /* paper */
+    background-color: #f9f8f6; /* Editorial 暖米底 */
     min-height: 100vh;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
   }
 
-  /* 选中文字的陶土色，呼应主题 */
+  /* 选中文字的墨色，呼应单色体系 */
   ::selection {
-    background: rgba(163, 103, 76, 0.18);
+    background: rgba(28, 28, 28, 0.12);
   }
 
   /* 移动端：输入框字号小于 16px 时 iOS Safari 会自动放大页面 */
@@ -43,43 +43,64 @@
 }
 
 @layer components {
-  /* 主按钮：墨色实底胶囊，悬停轻微上浮 + 柔光 */
+  /* 主按钮：墨色实底、尖角、字距加宽，悬停微透、按下轻缩
+     —— Editorial 铁律：rounded-none / 无阴影 / 纯单色 */
   .btn-primary {
-    @apply inline-flex items-center justify-center px-8 py-3.5 bg-ink text-parchment rounded-full hover:-translate-y-0.5 hover:shadow-soft-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0 disabled:hover:shadow-none;
+    @apply inline-flex items-center justify-center px-6 py-3 bg-ink text-paper text-sm tracking-wide rounded-none transition-[opacity,transform] duration-300 hover:opacity-90 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed disabled:active:scale-100;
   }
-  /* 次按钮：发丝边框，悬停微染 */
+  /* 次按钮：发丝边框、尖角、透明底，悬停微染 */
   .btn-secondary {
-    @apply inline-flex items-center justify-center px-8 py-3.5 border border-ink/15 text-ink rounded-full hover:border-ink/40 hover:bg-ink/5 transition-all duration-300 disabled:opacity-50;
+    @apply inline-flex items-center justify-center px-6 py-3 border border-ink text-ink text-sm tracking-wide rounded-none transition-colors hover:bg-ink/[0.04] disabled:opacity-50;
   }
-  /* 输入框：圆角发丝边框，聚焦落陶土色 */
+  /* 输入框：尖角发丝边框，聚焦落墨色 */
   .input-field {
-    @apply w-full px-4 py-3 border border-ink/15 rounded-xl bg-surface focus:outline-none focus:border-clay focus:ring-2 focus:ring-clay/15 transition-all disabled:opacity-60 disabled:cursor-not-allowed;
+    @apply w-full px-4 py-3 border border-ink/20 rounded-none bg-transparent text-ink text-base focus:outline-none focus:border-ink transition-colors disabled:opacity-60 disabled:cursor-not-allowed;
   }
-  /* 内容卡片：暖白、发丝边框、大圆角、极淡投影（诧寂的"素"感） */
+  /* 内容卡片：与底同色、发丝边、尖角、零阴影（编辑杂志的"素"感） */
   .surface-card {
-    @apply bg-surface rounded-3xl border border-ink/10 shadow-soft;
+    @apply bg-paper border border-ink/15 rounded-none;
   }
-  /* 小标签（章节眉题）：陶土色宽字距大写 */
+  /* 小标签（章节眉题）：墨色弱化 + 宽字距大写 */
   .eyebrow {
-    @apply text-xs uppercase tracking-[0.2em] text-clay/70 font-medium;
+    @apply text-xs uppercase tracking-[0.2em] text-ink/50 font-medium;
   }
 
-  /* 演示模式说明：清晰可读但不喧哗
-     —— 这是用户特别要求"别再被一眼略过"的提示 */
+  /* 演示模式说明：清晰可读但不喧哗 —— 发丝边 + 极淡墨染 */
   .demo-callout {
-    @apply flex items-start gap-3 rounded-2xl border border-clay/30 bg-clay/[0.06] px-5 py-4;
+    @apply flex items-start gap-3 rounded-none border border-ink/15 bg-ink/[0.03] px-5 py-4;
   }
   .demo-badge {
-    @apply inline-flex shrink-0 items-center gap-1.5 rounded-full bg-clay px-2.5 py-1 text-[11px] font-semibold leading-none tracking-wide text-parchment;
+    @apply inline-flex shrink-0 items-center gap-1.5 rounded-none bg-ink px-2.5 py-1 text-[11px] font-semibold leading-none tracking-wide text-paper;
+  }
+
+  /* 导航/链接的悬停下划线（Editorial 标志动效：从右向左描出细线） */
+  .hover-underline {
+    @apply relative;
+  }
+  .hover-underline::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 100%;
+    height: 1px;
+    background-color: currentColor;
+    transform: scaleX(0);
+    transform-origin: bottom right;
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .hover-underline:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
   }
 }
 
 @layer utilities {
-  /* ---- 动画 ---- */
+  /* ---- 动画（仅透明度/位移，不引入彩色与阴影） ---- */
   @keyframes toast-in {
     from {
       opacity: 0;
-      transform: translateY(12px) scale(0.96);
+      transform: translateY(12px) scale(0.98);
     }
     to {
       opacity: 1;
@@ -105,7 +126,7 @@
   @keyframes scale-in {
     from {
       opacity: 0;
-      transform: scale(0.94);
+      transform: scale(0.98);
     }
     to {
       opacity: 1;
