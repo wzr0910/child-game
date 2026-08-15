@@ -57,6 +57,10 @@ export default function Home() {
         <p className="text-sm text-ink/40 mt-8">
           3 轮对话 · 5 分钟 · 一份属于你的&ldquo;孩子宣言&rdquo;
         </p>
+        <p className="text-xs text-ink/35 mt-3 max-w-md mx-auto leading-relaxed">
+          演示模式说明：当前线上版本的 AI 回复为预置话术，用于完整展示产品闭环；
+          架构已支持接入 DeepSeek 真实模型，填入密钥即可切换。
+        </p>
       </section>
 
       {/* 流程 */}
