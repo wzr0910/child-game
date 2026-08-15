@@ -45,7 +45,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#f5f1e8",
+  themeColor: "#f4f1ea",
   width: "device-width",
   initialScale: 1,
 };
@@ -57,7 +57,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="zh-CN">
-      <body className="bg-parchment text-ink font-serif antialiased min-h-screen flex flex-col">
+      <body className="bg-paper text-ink font-sans antialiased min-h-screen flex flex-col">
         <ToastProvider>
           <Nav />
           <div className="flex-1">{children}</div>

@@ -22,13 +22,25 @@ export function Nav() {
   const pathname = usePathname();
 
   return (
-    <header className="sticky top-0 z-40 border-b border-ink/10 bg-parchment/80 backdrop-blur-md">
+    <header className="sticky top-0 z-40 border-b border-ink/10 bg-paper/80 backdrop-blur-md">
       <nav className="max-w-5xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between gap-4">
         <Link
           href="/"
-          className="flex items-center gap-2 font-bold tracking-wide shrink-0 hover:opacity-70 transition-opacity"
+          className="flex items-center gap-2.5 font-semibold tracking-wide shrink-0 hover:opacity-70 transition-opacity"
         >
-          <span className="text-gold text-lg">🌀</span>
+          <svg
+            viewBox="0 0 24 24"
+            className="w-5 h-5 text-clay"
+            fill="none"
+            aria-hidden="true"
+          >
+            <path
+              d="M20.5 12a8.5 8.5 0 1 1-2.7-6.2"
+              stroke="currentColor"
+              strokeWidth="2.3"
+              strokeLinecap="round"
+            />
+          </svg>
           <span className="hidden sm:inline">孩子的游戏</span>
         </Link>
 

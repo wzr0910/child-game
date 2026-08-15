@@ -62,7 +62,7 @@ export default function IntroPage() {
 
         {/* 它解决什么问题 */}
         <section className="mb-10">
-          <h2 className="text-sm uppercase tracking-widest text-ink/40 mb-5">
+          <h2 className="eyebrow mb-5">
             它解决什么问题
           </h2>
           <div className="space-y-4">
@@ -77,13 +77,13 @@ export default function IntroPage() {
 
         {/* 怎么玩 */}
         <section className="mb-10">
-          <h2 className="text-sm uppercase tracking-widest text-ink/40 mb-5">
+          <h2 className="eyebrow mb-5">
             怎么玩（四步）
           </h2>
           <ol className="grid grid-cols-2 gap-4">
             {STEPS.map((item) => (
               <li key={item.step} className="surface-card p-5 text-center">
-                <div className="text-gold text-xs tracking-widest mb-3">
+                <div className="text-clay text-xs tracking-widest mb-3">
                   {item.step}
                 </div>
                 <div className="font-bold mb-1">{item.title}</div>
@@ -97,7 +97,7 @@ export default function IntroPage() {
 
         {/* 适合谁 */}
         <section className="mb-10">
-          <h2 className="text-sm uppercase tracking-widest text-ink/40 mb-5">
+          <h2 className="eyebrow mb-5">
             适合谁看
           </h2>
           <div className="surface-card p-5 divide-y divide-ink/5">
@@ -111,7 +111,7 @@ export default function IntroPage() {
 
         {/* 技术亮点（给面试官） */}
         <section className="mb-10">
-          <h2 className="text-sm uppercase tracking-widest text-ink/40 mb-5">
+          <h2 className="eyebrow mb-5">
             技术亮点
           </h2>
           <div className="surface-card p-5 text-sm text-ink/70 leading-loose">
@@ -124,13 +124,15 @@ export default function IntroPage() {
 
         {/* 诚实说明 */}
         <section className="mb-10">
-          <h2 className="text-sm uppercase tracking-widest text-ink/40 mb-5">
+          <h2 className="eyebrow mb-5">
             当前版本说明
           </h2>
-          <div className="surface-card p-5 border-l-4 border-gold text-sm text-ink/70 leading-loose">
-            <strong className="text-ink">演示模式：</strong>
-            当前线上版本的 AI 回复为预置话术，用于完整展示产品闭环；
-            真实模型接入（DeepSeek）的代码已保留，填入密钥即可切换。
+          <div className="demo-callout">
+            <span className="demo-badge">演示模式</span>
+            <p className="text-sm text-ink/75 leading-relaxed">
+              <strong className="text-ink">当前线上版本说明：</strong>
+              本作品集部署的是纯前端演示版，AI 对话采用预置话术（演示模式），用于完整展示产品闭环；真实模型接入（DeepSeek）的代码已保留，填入密钥即可切换。
+            </p>
           </div>
         </section>
 

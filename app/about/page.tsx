@@ -74,16 +74,18 @@ export default function AboutPage() {
 
         {/* 当前线上版本说明（给面试官看的诚实声明） */}
         <section className="mb-8">
-          <div className="surface-card p-5 border-l-4 border-gold text-sm text-ink/70 leading-loose">
-            <strong className="text-ink">当前线上版本说明：</strong>
-            本作品集部署的是纯前端演示版，AI 对话采用预置话术（演示模式），用于完整展示产品闭环；
-            真实模型接入（DeepSeek）的代码已保留，填入密钥即可切换。下方「关键决策」记录了完整的技术取舍。
+          <div className="demo-callout">
+            <span className="demo-badge">演示模式</span>
+            <p className="text-sm text-ink/75 leading-relaxed">
+              <strong className="text-ink">当前线上版本说明：</strong>
+              本作品集部署的是纯前端演示版，AI 对话采用预置话术（演示模式），用于完整展示产品闭环；真实模型接入（DeepSeek）的代码已保留，填入密钥即可切换。下方「关键决策」记录了完整的技术取舍。
+            </p>
           </div>
         </section>
 
         {/* 决策复盘 */}
         <section className="mb-10">
-          <h2 className="text-sm uppercase tracking-widest text-ink/40 mb-5">
+          <h2 className="eyebrow mb-5">
             关键决策
           </h2>
           <div className="space-y-4">
@@ -91,7 +93,7 @@ export default function AboutPage() {
               <details key={item.title} className="surface-card group">
                 <summary className="cursor-pointer list-none p-5 flex items-start justify-between gap-4 font-semibold">
                   <span>{item.title}</span>
-                  <span className="text-gold shrink-0 transition-transform group-open:rotate-45">
+                  <span className="text-clay shrink-0 transition-transform group-open:rotate-45">
                     +
                   </span>
                 </summary>
@@ -105,7 +107,7 @@ export default function AboutPage() {
 
         {/* 技术栈 */}
         <section className="mb-10">
-          <h2 className="text-sm uppercase tracking-widest text-ink/40 mb-5">
+          <h2 className="eyebrow mb-5">
             技术选型
           </h2>
           <div className="surface-card divide-y divide-ink/5">
@@ -127,7 +129,7 @@ export default function AboutPage() {
 
         {/* 边界 */}
         <section className="mb-10">
-          <h2 className="text-sm uppercase tracking-widest text-ink/40 mb-5">
+          <h2 className="eyebrow mb-5">
             产品边界
           </h2>
           <div className="surface-card p-6 text-sm text-ink/70 leading-loose">

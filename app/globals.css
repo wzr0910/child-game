@@ -3,12 +3,24 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    color-scheme: light;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
-    background-image:
-      radial-gradient(at 20% 30%, rgba(184, 134, 11, 0.04) 0px, transparent 50%),
-      radial-gradient(at 80% 70%, rgba(156, 175, 136, 0.06) 0px, transparent 50%);
+    background-color: #f4f1ea; /* paper */
     min-height: 100vh;
-    background-attachment: fixed;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* 选中文字的陶土色，呼应主题 */
+  ::selection {
+    background: rgba(163, 103, 76, 0.18);
   }
 
   /* 移动端：输入框字号小于 16px 时 iOS Safari 会自动放大页面 */
@@ -31,18 +43,34 @@
 }
 
 @layer components {
+  /* 主按钮：墨色实底胶囊，悬停轻微上浮 + 柔光 */
   .btn-primary {
-    @apply px-6 py-3 bg-ink text-parchment rounded-lg hover:bg-ink/90 transition-all disabled:opacity-50 disabled:cursor-not-allowed;
+    @apply inline-flex items-center justify-center px-8 py-3.5 bg-ink text-parchment rounded-full hover:-translate-y-0.5 hover:shadow-soft-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0 disabled:hover:shadow-none;
   }
+  /* 次按钮：发丝边框，悬停微染 */
   .btn-secondary {
-    @apply px-6 py-3 border border-ink text-ink rounded-lg hover:bg-ink hover:text-parchment transition-all disabled:opacity-50 disabled:cursor-not-allowed;
+    @apply inline-flex items-center justify-center px-8 py-3.5 border border-ink/15 text-ink rounded-full hover:border-ink/40 hover:bg-ink/5 transition-all duration-300 disabled:opacity-50;
   }
+  /* 输入框：圆角发丝边框，聚焦落陶土色 */
   .input-field {
-    @apply w-full px-4 py-3 border border-ink/20 rounded-lg bg-white/50 focus:outline-none focus:border-gold focus:ring-2 focus:ring-gold/20 transition-all disabled:opacity-60 disabled:cursor-not-allowed;
+    @apply w-full px-4 py-3 border border-ink/15 rounded-xl bg-surface focus:outline-none focus:border-clay focus:ring-2 focus:ring-clay/15 transition-all disabled:opacity-60 disabled:cursor-not-allowed;
   }
-  /* 内容卡片：画廊 / 关于页复用 */
+  /* 内容卡片：暖白、发丝边框、大圆角、极淡投影（诧寂的"素"感） */
   .surface-card {
-    @apply bg-white/60 backdrop-blur-sm rounded-2xl border border-ink/10;
+    @apply bg-surface rounded-3xl border border-ink/10 shadow-soft;
+  }
+  /* 小标签（章节眉题）：陶土色宽字距大写 */
+  .eyebrow {
+    @apply text-xs uppercase tracking-[0.2em] text-clay/70 font-medium;
+  }
+
+  /* 演示模式说明：清晰可读但不喧哗
+     —— 这是用户特别要求"别再被一眼略过"的提示 */
+  .demo-callout {
+    @apply flex items-start gap-3 rounded-2xl border border-clay/30 bg-clay/[0.06] px-5 py-4;
+  }
+  .demo-badge {
+    @apply inline-flex shrink-0 items-center gap-1.5 rounded-full bg-clay px-2.5 py-1 text-[11px] font-semibold leading-none tracking-wide text-parchment;
   }
 }
 

@@ -52,7 +52,7 @@ export function CandidateSelector({
               onClick={() => onSelect(c.id)}
               className={`p-5 rounded-xl border-2 cursor-pointer transition-all ${
                 isSelected
-                  ? "border-gold bg-gold/5 shadow-md"
+                  ? "border-clay bg-clay/5 shadow-md"
                   : "border-ink/10 bg-white/60 hover:border-ink/30"
               }`}
             >
@@ -65,7 +65,7 @@ export function CandidateSelector({
                   {c.style}版
                 </span>
                 {isSelected && (
-                  <span className="text-xs text-gold font-semibold">
+                  <span className="text-xs text-clay font-semibold">
                     ✓ 已选中
                   </span>
                 )}
@@ -76,7 +76,7 @@ export function CandidateSelector({
                   onChange={(e) => onEdit(e.target.value)}
                   onClick={(e) => e.stopPropagation()}
                   rows={6}
-                  className="w-full p-3 bg-white/80 border border-ink/20 rounded-lg focus:outline-none focus:border-gold resize-none leading-relaxed"
+                  className="w-full p-3 bg-white/80 border border-ink/20 rounded-lg focus:outline-none focus:border-clay resize-none leading-relaxed"
                 />
               ) : (
                 <p className="text-ink/80 leading-relaxed whitespace-pre-wrap">

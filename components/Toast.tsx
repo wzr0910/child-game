@@ -34,7 +34,7 @@ type ToastContextValue = {
 const ToastContext = createContext<ToastContextValue | null>(null);
 
 const KIND_STYLE: Record<ToastKind, string> = {
-  success: "bg-ink text-parchment border-gold/40",
+  success: "bg-ink text-parchment border-clay/40",
   error: "bg-red-900 text-parchment border-red-400/40",
   info: "bg-ink/90 text-parchment border-ink/40",
 };

@@ -28,13 +28,13 @@ const STYLES: Array<{
     id: "classical",
     name: "古典",
     desc: "典雅、像古籍",
-    preview: "bg-parchment text-ink border-4 border-double border-gold",
+    preview: "bg-parchment text-ink border-4 border-double border-clay",
   },
   {
     id: "futuristic",
     name: "未来感",
     desc: "深邃、神秘",
-    preview: "bg-ink text-parchment border-2 border-gold",
+    preview: "bg-ink text-parchment border-2 border-clay",
   },
   {
     id: "handwritten",
@@ -63,7 +63,7 @@ export function StyleSelector({ selectedStyle, onSelect }: StyleSelectorProps) {
               onClick={() => onSelect(s.id)}
               className={`p-4 rounded-xl border-2 cursor-pointer transition-all ${
                 isSelected
-                  ? "border-gold bg-gold/5 shadow-md scale-105"
+                  ? "border-clay bg-clay/5 shadow-md scale-105"
                   : "border-ink/10 bg-white/60 hover:border-ink/30"
               }`}
             >
@@ -78,7 +78,7 @@ export function StyleSelector({ selectedStyle, onSelect }: StyleSelectorProps) {
                 <div className="text-xs text-ink/50 mt-1">{s.desc}</div>
               </div>
               {isSelected && (
-                <div className="text-center mt-2 text-xs text-gold font-semibold">
+                <div className="text-center mt-2 text-xs text-clay font-semibold">
                   ✓
                 </div>
               )}

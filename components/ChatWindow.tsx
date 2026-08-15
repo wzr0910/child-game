@@ -354,16 +354,17 @@ export function ChatWindow() {
 
   return (
     <>
-      <div className="bg-white/60 backdrop-blur-sm rounded-2xl border border-ink/10 shadow-lg overflow-hidden">
+      <div className="bg-surface rounded-3xl border border-ink/10 shadow-soft overflow-hidden">
         {/* 演示模式提示 */}
         {isDemo && (
-          <div className="px-4 py-2 bg-gold/10 border-b border-gold/20 text-xs text-center text-ink/70">
-            演示模式：未配置 DEEPSEEK_API_KEY，当前展示的是预置回复
+          <div className="flex items-center justify-center gap-2 px-4 py-2.5 bg-clay/[0.06] border-b border-clay/25 text-sm text-ink/80">
+            <span className="demo-badge">演示模式</span>
+            <span>当前展示的是预置回复，填入密钥即可切换真实 AI</span>
           </div>
         )}
 
         {/* 顶部：步骤指示 + 重新开始 */}
-        <div className="flex items-center justify-between gap-3 p-4 border-b border-ink/10 bg-ink/5">
+        <div className="flex items-center justify-between gap-3 p-4 border-b border-ink/10 bg-ink/[0.03]">
           <StepIndicator currentStep={step} />
           {messages.length > 0 && (
             <button
