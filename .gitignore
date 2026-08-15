@@ -1,13 +1,13 @@
-# dependencies
-/node_modules
+# dependencies (任意层级都忽略)
+node_modules/
 
 # next.js build output
-/.next/
-/out/
+.next/
+out/
 
-# cloudbase / edgeone full-stack artifacts (GitHub Pages 用不到)
-/.cloudbase/
-/.edgeone/
+# cloudbase / edgeone full-stack artifacts
+.cloudbase/
+.edgeone/
 
 # env files (never commit secrets)
 .env
