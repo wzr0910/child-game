@@ -41,15 +41,15 @@ cp .env.local.example .env.local
 把里面的占位值替换成你记事本里的真实值：
 
 ```
-NEXT_PUBLIC_SUPABASE_URL=你的 Supabase 项目 URL
-NEXT_PUBLIC_SUPABASE_ANON_KEY=你的 Supabase anon key（完整长串）
+CLOUDBASE_ENV_ID=你的 CloudBase 环境 ID（形如 child-game-xxxx）
+CLOUDBASE_PUBLISHABLE_KEY=你的 CloudBase Publishable Key
 DEEPSEEK_API_KEY=sk-xxxxx
 ```
 
 > ⚠️ **重要**：
 > - `DEEPSEEK_API_KEY` 不要有引号，**直接换值**就行。
-> - `NEXT_PUBLIC_SUPABASE_ANON_KEY` 必须填 **Supabase 后台 `Project Settings → API` 里复制的完整 anon key**。`example` 文件里那个 `eyJhbGc...` 是截断占位符，不能直接用，否则公共画廊会连不上。
-> - 这两个 Supabase 变量不填也能跑：公共画廊会显示「还没开放」，本地收藏照常。
+> - `CLOUDBASE_PUBLISHABLE_KEY` 必须填 **CloudBase 控制台「API Key 配置」里生成的 Publishable Key（anon 角色）**。`example` 文件里那个 `your_publishable_key_here` 是占位符，不能直接用，否则公共画廊会连不上。
+> - 这两个 CloudBase 变量不填也能跑：公共画廊会显示「还没开放」，本地收藏照常。
 
 ---
 
@@ -116,7 +116,7 @@ portfolio-project/
 │   ├── ai/
 │   │   ├── deepseek.ts   # DeepSeek 客户端
 │   │   └── prompts.ts    # AI 角色 prompt
-│   └── db/supabase.ts    # 数据库客户端
+│   └── db/cloudbase.ts   # CloudBase 客户端（PG 模式）
 │
 ├── docs/                   # 文档
 ├── .env.local.example     # 环境变量模板
@@ -128,7 +128,7 @@ portfolio-project/
 ## ✅ 跑通后，告诉我"跑起来了"！
 
 P0 已做完（对话 → 3 候选 → 风格命名 → 宣言卡片）。下一步：
-- 接 Supabase 公共画廊（建表 SQL + 环境变量，见下方提示）
-- 部署到 Vercel 上线（**完整步骤见 `README.md` 的「部署到 Vercel」一节**）
+- 接 CloudBase 公共画廊（建表 SQL + 环境变量，见下方提示）
+- 部署到 EdgeOne Pages 上线（**完整步骤见 `README.md` 的「部署到 EdgeOne Pages」一节**）
 
-> 💡 想接公共画廊：去 Supabase SQL Editor 执行建表语句（见 `README.md`「接入 Supabase 公共画廊」一节），再把完整的 anon key 填进 `.env.local`。
+> 💡 想接公共画廊：去 CloudBase 控制台执行建表语句（见 `README.md`「接入 CloudBase 公共画廊」一节），再把 Publishable Key 填进 `.env.local`。

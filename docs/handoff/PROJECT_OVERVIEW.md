@@ -123,10 +123,10 @@
 | 层 | 选型 | 理由 |
 |---|---|---|
 | 前端 + 后端 | Next.js 14 (App Router) | 前后端一体，新手友好，部署简单 |
-| 数据库 + 认证 | Supabase | 免费额度够用，自带用户系统，PostgreSQL 强大 |
+| 数据库（公共画廊） | CloudBase（PostgreSQL 模式） | 腾讯云，国内可达；匿名写、不存身份字段 |
 | AI 大模型 | DeepSeek | 中文能力顶级、角色扮演强、价格 1/30 的 GPT-4 |
 | AI 生图 | 即梦 AI | 暂未接入 |
-| 部署 | Vercel + Supabase | 暂未部署 |
+| 部署 | 腾讯云 EdgeOne Pages（*.edgeone.cool） | 已部署预览版 |
 | 样式 | Tailwind CSS | 自定义哲学主题色 |
 
 ### 关键文件说明
@@ -168,7 +168,7 @@ localStorage 保存
 | 2026-08-09 22:00 | 项目启动，4 文档框架搭建 |
 | 2026-08-09 22:30 | 模拟面试 4 题完成，PRD v0.3 |
 | 2026-08-09 23:10 | DeepSeek 申请 |
-| 2026-08-09 23:30 | Supabase 项目创建 |
+| 2026-08-09 23:30 | CloudBase 环境创建 |
 | 2026-08-10 20:42 | 3 个 key 全部就位 |
 | 2026-08-10 21:00 | 全栈代码生成（24 文件，~1970 行）|
 | 2026-08-10 22:00 | 项目本地跑通 |
@@ -199,7 +199,7 @@ localStorage 保存
 > **「孩子的游戏」AI 哲学共读平台**
 > 用尼采"孩子"哲学 + AI，让 20-30 岁奥德赛时期年轻人通过 3 轮对话重新发现自己"愿意"做的事，并生成可分享的"孩子宣言"。
 > - 角色：产品设计 / 全栈开发
-> - 技术栈：Next.js 14 · TypeScript · Supabase · DeepSeek API · Tailwind CSS
+> - 技术栈：Next.js 14 · TypeScript · CloudBase · DeepSeek API · Tailwind CSS
 > - 贡献：产品定位、Co-Creation 机制设计、Prompt Engineering、全栈实现
 
 ---
@@ -220,8 +220,8 @@ localStorage 保存
 3. 移动端深度适配
 
 **P2 - 锦上添花**：
-1. Supabase 接入（用户系统）
-2. 部署 Vercel
+1. CloudBase 公共画廊接入
+2. 部署 EdgeOne Pages
 3. AI 生图
 4. 宣言画廊（UGC 闭环）
 

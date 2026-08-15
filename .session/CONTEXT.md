@@ -1,0 +1,50 @@
+# 会话上下文摘要（自动生成，勿手改）
+
+> 更新时间：2026-08-10T18:11:58.933Z
+> 来源：C:\Users\王梓睿\WorkBuddy\孩子的游戏\portfolio-project\progress.md
+> 原始行数：138 → 已压缩为要点
+
+## ✅ 已完成
+- ✅ DeepSeek API Key 申请
+- ✅ Supabase 项目创建（"孩子的游戏"）+ API 配置
+- ✅ 升级 PRD v0.3 加入 Co-Creation 机制
+- ✅ 完成 4 道模拟面试题，作品集叙事就绪
+- ✅ 全栈代码框架生成完成
+- ✅ 项目本地跑通（http://127.0.0.1:3000）
+- ✅ **🎉 P0 全部实现：Co-Creation 多步骤 + 宣言卡片化 + 对话历史保存**
+- 3. **边做边学**：每完成一个功能，解释背后的原理
+- 9. **P0 决策**：Co-Creation 用 5 步骤状态机（对话→候选→风格+命名→完成）
+- ✅ Next.js 14 App Router
+- ✅ TypeScript
+- ✅ Tailwind CSS（自定义哲学主题色）
+
+## ⏳ 待办
+- ⏳ P1：错误处理、加载优化、手机适配
+- ⏳ P2：Supabase 数据持久化、Vercel 部署
+
+## 🔑 关键变量
+- 在 `.env.local` 填入真实 `NEXT_PUBLIC_SUPABASE_URL` + `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+
+## 🧠 重要决策
+- 4. **核心洞察 1**：用户选择"孩子"阶段——产品即隐喻
+- 5. **核心洞察 2**：可被分享的内容必须有用户参与——Co-Creation
+- 6. **核心洞察 3**："奥德赛时期"作为目标用户定位词
+- 7. **技术决策**：用 OpenAI SDK 调 DeepSeek（接口兼容）
+- 8. **设计决策**：哲学主题 UI（羊皮纸 + 墨色 + 金色）
+- `components/CandidateSelector.tsx` —— 候选选择（P0）
+- `components/StyleSelector.tsx` —— 风格选择（P0）
+
+## 📌 最近要点
+- （表结构本身无 user_id/邮箱/IP，天然不泄露身份）
+- 在 Supabase SQL Editor 执行建表 SQL（见 lib/db/supabase.ts 注释）
+- （注意：`.env.local.example` 里的 anon key 是截断占位符，必须换成完整真实值）
+- 跑 `npm run dev` 验证公共画廊能读写
+- `npm run build`：✓ 编译成功 / ✓ 类型检查 / ✓ 12 个静态页生成（含 /gallery）
+- `npx tsc --noEmit`：EXIT=0，零类型错误
+- 唯一报错为沙箱回收站清理 `.next/export` 失败，属环境权限问题，与代码无关
+- 等用户填 Supabase 环境变量 + 建表后，公共画廊才真正联通
+- 新增：本地运行、环境变量表、Supabase 公共画廊接入（建表 SQL + 填变量）、Vercel 部署流程
+- Vercel 部分含「初始化 git → 推 GitHub → 导入 Vercel」完整路径（项目当前非 git 仓库）+ CLI 备选
+
+---
+> 新窗口初始化时读这个文件即可恢复上下文，无需重读全部历史。

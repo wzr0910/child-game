@@ -27,13 +27,13 @@
 > 关键设计：**Co-Creation 机制**——AI 给候选、用户自己选、自己命名。用户拿到的不是 AI 的产物，是自己的作品。这才是值得分享的内容。"
 
 ### 4. 技术实现（15s）
-> "Next.js 全栈 + Supabase 数据库 + DeepSeek 大模型 + 自研 Prompt Engineering 实现了查拉图斯特拉的角色一致性。"
+> "Next.js 全栈 + 腾讯云 CloudBase（PostgreSQL PG 模式）数据库 + DeepSeek 大模型 + 自研 Prompt Engineering 实现了查拉图斯特拉的角色一致性。"
 
 ### 5. 你的能力体现（15s）
 > "做这个项目让我锻炼了四种能力：①识别竞品本质差异的产品哲学能力 ②主导 Co-Creation 机制设计的体验设计能力 ③把抽象哲学落成可交互产品的转化能力 ④跨领域结合的差异化定位能力。"
 
 ### 6. 未来规划（10s）
-> "下一步做宣言画廊 + 用户系统，长期看可以延伸成职业探索 / 心理咨询辅助 / 内容订阅。"
+> "下一步完善宣言画廊、接入 AI 生图开场，长期看可以延伸成职业探索 / 心理咨询辅助 / 内容订阅。"
 
 ---
 
@@ -58,7 +58,7 @@
 > "让 AI 保持'查拉图斯特拉'的角色一致性。我用了三层 Prompt 设计：①基础角色设定 ②价值观边界 ③分阶段引导。同时控制 temperature 0.8 平衡创造性和稳定性。"
 
 ### Q7：如果让你重做一次，你会改什么？
-> "我会更早引入 Supabase 的用户系统。因为现在每个用户的对话不保存，重做时他们会希望看到自己的'孩子'轨迹。这是产品经理的教训：MVP 阶段就要想好"用户复访"的钩子。"
+> "我会更早把对话与'我的宣言'从纯本地（localStorage）扩展到云端同步——用 CloudBase 让用户跨设备看到自己的'孩子'轨迹。这是产品经理的教训：MVP 阶段就要想好'用户复访'的钩子。"
 
 ---
 
@@ -74,12 +74,12 @@
 产品设计 / 全栈开发
 
 ### 技术栈
-Next.js 14 · TypeScript · Supabase · DeepSeek API · Tailwind CSS
+Next.js 14 · TypeScript · CloudBase(PG) · DeepSeek API · Tailwind CSS
 
 ### 你的贡献
 - **产品设计**：从 0 到 1 设计产品定位、用户旅程、Co-Creation 机制
 - **Prompt Engineering**：设计 4 阶段 System Prompt，实现查拉图斯特拉角色一致性
-- **全栈开发**：Next.js App Router 全栈实现，集成 DeepSeek API 和 Supabase
+- **全栈开发**：Next.js App Router 全栈实现，集成 DeepSeek API 和 CloudBase
 - **产品哲学**：跨领域结合（哲学+AI）找到差异化定位
 
 ### 数据（如果上线）

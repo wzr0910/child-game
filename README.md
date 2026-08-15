@@ -14,8 +14,8 @@
 | 前端 + 后端 | Next.js 14（App Router） | 一套搞定，部署简单 |
 | 样式 | Tailwind CSS | 自定义哲学主题色（羊皮纸 / 墨 / 金） |
 | AI 大模型 | DeepSeek（OpenAI 接口兼容） | 不填 key 也能跑「演示模式」 |
-| 数据库 | Supabase（PostgreSQL） | 公共画廊用，可选接入 |
-| 部署 | Vercel | 免费、Next.js 官方支持 |
+| 数据库 | 腾讯云 CloudBase（PostgreSQL / PG 模式） | 公共画廊用，可选接入；替代已弃用的 Supabase |
+| 部署 | 腾讯云 EdgeOne Pages | 国内可直连，域名形如 `*.edgeone.cool` |
 
 ---
 
@@ -38,7 +38,7 @@ portfolio-project/
 │   └── ...
 ├── lib/
 │   ├── ai/                         # DeepSeek 客户端 + 角色 prompt
-│   ├── db/supabase.ts              # Supabase 客户端（含建表 SQL）
+│   ├── db/cloudbase.ts             # CloudBase 客户端（PG 模式 REST 封装）
 │   ├── db/declarations.ts          # 云端读写封装（本次新增）
 │   └── utils/                      # 本地存储 / 画廊 / 卡片导出
 ├── docs/                           # 安装指南 / 面试话术等
@@ -79,37 +79,35 @@ npm run dev
 
 | 变量 | 作用 | 是否必填 | 是否公开 |
 |---|---|---|---|
-| `NEXT_PUBLIC_SUPABASE_URL` | Supabase 项目地址 | 接公共画廊才需要 | ✅ 会进前端 |
-| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Supabase 匿名 key | 接公共画廊才需要 | ✅ 会进前端 |
+| `CLOUDBASE_ENV_ID` | CloudBase 环境 ID（形如 `child-game-xxxx`） | 接公共画廊才需要 | ❌ 仅服务端 |
+| `CLOUDBASE_PUBLISHABLE_KEY` | CloudBase Publishable Key（anon 角色） | 接公共画廊才需要 | ❌ 仅服务端 |
+| `CLOUDBASE_PUBLISHABLE_KEY_1/2/3` | 超长 key 的分片写法（EdgeOne 单变量上限 1000 字符时备用） | 可选 | ❌ 仅服务端 |
 | `DEEPSEEK_API_KEY` | DeepSeek API key | 想要真实 AI 对话才需要 | ❌ 仅服务端 |
 | `DEEPSEEK_BASE_URL` | 默认 `https://api.deepseek.com` | 一般不用改 | — |
 
 **规则**：
 - 不填 `DEEPSEEK_API_KEY` → 演示模式，站点不崩。
-- 不填 Supabase 两个变量 → 公共画廊显示「还没开放」，本地收藏照常。
+- 不填 CloudBase 两个变量 → 公共画廊显示「还没开放」，本地收藏照常。
 - `.env.local` 已被 `.gitignore` 忽略，**不会**被提交，放心填真实值。
 
 ---
 
-## 🗄️ 接入 Supabase 公共画廊（可选，但作品集推荐）
+## 🗄️ 接入 CloudBase 公共画廊（可选，但作品集推荐）
 
 让「宣言画廊」能展示所有人的宣言，且你换设备也能看到自己收藏。
 
 **第 1 步：拿到凭据**
-Supabase 后台（https://supabase.com）→ 新建项目 → `Project Settings → API`，复制：
-- `Project URL` → 填 `NEXT_PUBLIC_SUPABASE_URL`
-- `anon public` key → 填 `NEXT_PUBLIC_SUPABASE_ANON_KEY`（**要完整的那一长串**，不是截断的）
+CloudBase 控制台（https://console.cloud.tencent.com/tcb）→ 新建环境（按量计费 / 基础版）→ 记录**环境 ID（envId）**，形如 `child-game-xxxx`。在「API Key 配置」里生成 **Publishable Key**（anon 角色）。
 
 **第 2 步：建表**
-Supabase → `SQL Editor` → 新建查询，粘贴下面这段，点 `Run`：
+CloudBase 的 PG 模式基于 Postgres，在控制台「数据库 → SQL 执行」里粘贴下面这段并运行：
 
 ```sql
-create table declarations (
+create table if not exists declarations (
   id uuid primary key default gen_random_uuid(),
-  user_input jsonb,
   declaration_text text not null,
-  card_style text,
   card_name text,
+  card_style text,
   created_at timestamptz default now()
 );
 
@@ -123,25 +121,30 @@ create policy "public read" on declarations
 create policy "public insert" on declarations
   for insert with check (true);
 
-create index declarations_created_at_idx
+create index if not exists declarations_created_at_idx
   on declarations (created_at desc);
 ```
 
-**第 3 步：验证**
-重启 `npm run dev` → 生成一份宣言 → 打开 `/gallery`，下方「公共画廊」应出现你刚生成的卡片。
+**第 3 步：填环境变量**
+把下面两个值填进部署平台（EdgeOne）的「环境变量」，本地则填进 `.env.local`：
+- `CLOUDBASE_ENV_ID` → 你的环境 ID
+- `CLOUDBASE_PUBLISHABLE_KEY` → 你的 Publishable Key（若平台限制单变量长度，改用 `_1/_2/_3` 分片）
+
+**第 4 步：验证**
+重启 `npm run dev` → 生成一份宣言 → 打开 `/gallery`，下方「公共画廊」应出现你刚生成的卡片。也可访问 `/api/gallery?debug=1` 自检（只返回 key 长度等，不泄露密钥明文）。
 
 > 🔒 隐私设计：云端表只有 `宣言文字 / 风格 / 名字 / 时间`，没有任何用户身份信息，匿名即可写入。
 
 ---
 
-## 🌐 部署到 Vercel（让面试官能直接打开）
+## 🌐 部署到 EdgeOne Pages（让面试官能直接打开）
 
-本项目**不是 git 仓库**，推荐走「GitHub 导入」这条路：
+本项目已配置 `edgeone.json`（build 命令 `npm run build`、输出目录 `.next`），直接对接 EdgeOne Pages 即可。
 
-### 方式 A：GitHub 导入（推荐）
+### 方式 A：Git 仓库导入（推荐）
 
 ```bash
-# 1. 初始化并提交
+# 1. 初始化并提交（若还不是 git 仓库）
 git init
 git add .
 git commit -m "init: 孩子的游戏 v0.1"
@@ -152,25 +155,32 @@ git remote add origin https://github.com/你的用户名/仓库名.git
 git push -u origin main
 ```
 
-然后在 Vercel：
-1. 登录 https://vercel.com → **Add New → Project**
-2. **Import** 刚才的 GitHub 仓库（Framework 会自动识别为 Next.js）
-3. 进入项目 **Settings → Environment Variables**，把 `.env.local` 里的 4 个变量**原样**填进去（名字和值都要一致）
-4. 点 **Deploy** → 拿到形如 `https://孩子的游戏.vercel.app` 的网址
+然后在 EdgeOne Pages：
+1. 打开 EdgeOne Pages 控制台 → **新建项目** → **导入 Git 仓库**（Framework 会自动识别为 Next.js）
+2. **Import** 刚才的 GitHub 仓库
+3. 进入项目 **环境变量**，把 `.env.local` 里的变量**原样**填进去（名字和值都要一致；`DEEPSEEK_API_KEY`、`CLOUDBASE_*` 都是服务端密钥，不会进前端）
+4. 点 **部署** → 拿到形如 `https://child-game-xxxx.edgeone.cool` 的网址
 
-> 之后每次 `git push` 到 main，Vercel 会自动重新部署。
+> ⚠️ 预览部署（带 `?eo_token=...` 时效 token）会过期，**放简历请用正式域名**，不要放预览链接。
 
-### 方式 B：Vercel CLI（不依赖 GitHub）
+> 之后每次 `git push` 到 main，EdgeOne Pages 会自动重新部署。
+
+### 方式 B：EdgeOne CLI（不依赖 GitHub）
 
 ```bash
-npx vercel          # 首次按提示登录，一路回车
-# 部署前记得在 Vercel 后台的 Environment Variables 里填好变量
+# -e production：显式指定部署到「生产环境」，拿到对所有人公开、不带 token 的稳定链接。
+# （CLI 默认其实也是 production，但显式写上最稳妥，避免偶发拿到需要 ?eo_token 的预览链接）
+npx edgeone pages deploy .next --name child-game -e production
+# 部署前记得在 EdgeOne 后台的「环境变量」里填好变量
 ```
+> ⚠️ 如果线上拿到的是带 `?eo_token=...` 的链接（HTTP 401、无 token 打不开），说明这次被部署成了**预览环境**。
+> 解决：在 EdgeOne Pages 控制台找到该次部署 → 点 **「设为生产环境 / Promote to Production」**。
+> 之后 `https://child-game-xxxx.edgeone.cool`（**不带 token**）任何人都能直接打开，**放简历就用这个地址**。
 
 ### 部署小贴士
 - 不填 `DEEPSEEK_API_KEY` 也能部署成功，站点以**演示模式**运行（对话用预置回复），不会白屏。
-- `NEXT_PUBLIC_` 开头的变量会打进前端（本来就该公开）；`DEEPSEEK_API_KEY` 只在服务端用，安全。
-- 公共画廊要生效，Vercel 的环境变量里**必须**也有两个 `NEXT_PUBLIC_SUPABASE_*`，且 Supabase 表已建好。
+- `CLOUDBASE_*` 变量缺失时，公共画廊显示「还没开放」，主流程不受影响。
+- 想让国内 + 海外都稳，可同时参考 `docs/国内部署指南-CloudBase.md` 的 CloudBase 云托管方案作为备选。
 
 ---
 

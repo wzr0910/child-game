@@ -15,6 +15,7 @@ import {
   saveDeclarationRemote,
 } from "@/lib/db/declarations";
 import { downloadCardImage } from "@/lib/utils/cardImage";
+import { getChatReply, generateCandidates as aiGenerateCandidates } from "@/lib/ai/client";
 
 /**
  * 核心对话窗口组件
@@ -148,23 +149,12 @@ export function ChatWindow() {
       setStep(3);
 
       try {
-        const res = await fetch("/api/generate-candidates", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ messages: allMessages }),
-        });
+      const list: Candidate[] = await aiGenerateCandidates(allMessages);
+      if (list.length === 0) throw new Error("宣言铸造失败了，请重试");
 
-        const data = await res.json();
-        if (!res.ok) throw new Error(data.error || "生成失败");
-
-        const list: Candidate[] = Array.isArray(data.candidates)
-          ? data.candidates
-          : [];
-        if (list.length === 0) throw new Error("宣言铸造失败了，请重试");
-
-        setCandidates(list);
-        setIsDemo(Boolean(data.demo));
-        setStep(4);
+      setCandidates(list);
+      setIsDemo(true);
+      setStep(4);
       } catch (err) {
         console.error(err);
         toast(
@@ -183,17 +173,9 @@ export function ChatWindow() {
   const requestGreeting = useCallback(async () => {
     setLoading(true);
     try {
-      const res = await fetch("/api/chat", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ messages: [], stage: "greet" }),
-      });
-
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error || "请求失败");
-
-      setMessages([{ role: "assistant", content: data.message }]);
-      setIsDemo(Boolean(data.demo));
+      const message = await getChatReply("greet", []);
+      setMessages([{ role: "assistant", content: message }]);
+      setIsDemo(true);
     } catch (err) {
       console.error(err);
       greetedRef.current = false; // 允许用户重试
@@ -250,21 +232,13 @@ export function ChatWindow() {
     setLoading(true);
 
     try {
-      const res = await fetch("/api/chat", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ messages: newMessages, stage: step as ConversationStep }),
-      });
-
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error || "请求失败");
-
+      const message = await getChatReply(step as ConversationStep, newMessages);
       const withReply: ChatMessage[] = [
         ...newMessages,
-        { role: "assistant", content: data.message },
+        { role: "assistant", content: message },
       ];
       setMessages(withReply);
-      setIsDemo(Boolean(data.demo));
+      setIsDemo(true);
 
       if (step < 2) {
         setStep(step + 1);

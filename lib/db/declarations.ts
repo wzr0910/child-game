@@ -30,7 +30,8 @@ export type RemoteDeclaration = {
  * 是否启用云端画廊。接口本身始终存在，这里恒为 true；
  * 是否「真的连上数据库」由服务端通过 configured 标志告诉前端。
  */
-export const isRemoteGalleryEnabled = true;
+// 静态部署（GitHub Pages）没有服务端，云端画廊暂不启用。
+export const isRemoteGalleryEnabled = false;
 
 /**
  * 写入一条公共宣言（匿名，不含身份）
@@ -61,21 +62,8 @@ export async function saveDeclarationRemote(input: {
  * 失败时返回 { configured: true, items: [] }，绝不阻断页面渲染。
  */
 export async function listDeclarationsRemote(
-  limit = 60
+  _limit = 60
 ): Promise<{ configured: boolean; items: RemoteDeclaration[] }> {
-  try {
-    const res = await fetch(`/api/gallery?limit=${limit}`, { method: "GET" });
-    if (!res.ok) return { configured: true, items: [] };
-    const data = (await res.json()) as {
-      configured?: boolean;
-      items?: RemoteDeclaration[];
-    };
-    return {
-      configured: Boolean(data.configured),
-      items: (data.items ?? []) as RemoteDeclaration[],
-    };
-  } catch (e) {
-    console.error("[declarations] list failed:", e);
-    return { configured: true, items: [] };
-  }
+  // 静态部署（GitHub Pages）没有服务端，公共画廊暂不开放。
+  return { configured: false, items: [] };
 }

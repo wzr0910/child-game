@@ -62,7 +62,7 @@ npm run dev
 | `next` | Next.js 全栈框架 | ✅ |
 | `react`, `react-dom` | UI 库 | ✅ |
 | `openai` | OpenAI SDK（兼容 DeepSeek 协议）| ✅ |
-| `@supabase/supabase-js` | Supabase 客户端 | ✅（暂未实际用）|
+| CloudBase（公共画廊，可选） | 走 REST API，无需新增依赖 | ⬜ |
 | `lucide-react` | 图标库 | ✅ |
 | `tailwindcss` | 样式框架 | ✅ |
 | `typescript` | 类型系统 | ✅ |
@@ -72,14 +72,14 @@ npm run dev
 
 ## 5. 环境变量配置
 
-在 `.env.local` 中填入 3 个 key：
+在 `.env.local` 中填入对应的 key（公共画廊可选）：
 
 ```env
 # ============================================
-# Supabase 配置
+# CloudBase 配置（公共画廊，仅服务端，可选）
 # ============================================
-NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
-NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGc...
+CLOUDBASE_ENV_ID=child-game-xxxx
+CLOUDBASE_PUBLISHABLE_KEY=your_publishable_key
 
 # ============================================
 # DeepSeek 配置
@@ -90,10 +90,10 @@ DEEPSEEK_BASE_URL=https://api.deepseek.com
 
 ### 怎么获取这些 key
 
-**Supabase**:
-1. 打开 https://supabase.com
-2. 进你的项目 → Settings → API
-3. 复制 `Project URL` 和 `anon public` key
+**CloudBase**（公共画廊，可选）:
+1. 打开 https://console.cloud.tencent.com/tcb
+2. 新建环境 → 记录「环境 ID（envId）」
+3. 「API Key 配置」→ 生成 Publishable Key（anon 角色）
 
 **DeepSeek**:
 1. 打开 https://platform.deepseek.com
@@ -158,7 +158,7 @@ npm run lint     # 代码检查（暂未配置）
 
 ---
 
-## 8. 部署到 Vercel（待做，P2）
+## 8. 部署到 EdgeOne Pages（正式域名，P2）
 
 ```bash
 # 1. 推代码到 GitHub
@@ -168,13 +168,13 @@ git commit -m "init"
 git remote add origin https://github.com/你的用户名/portfolio-project.git
 git push -u origin main
 
-# 2. 打开 https://vercel.com
-# 3. Import 你的 GitHub repo
-# 4. 配置环境变量（粘贴 .env.local 的内容到 Vercel）
-# 5. 部署完成
+# 2. 打开 EdgeOne Pages 控制台（腾讯云）→ 新建项目 → 导入 Git 仓库
+# 3. Import 你的 GitHub repo（Next.js 会被自动识别）
+# 4. 配置环境变量（把 .env.local 的服务端变量粘进去，CloudBase/DeepSeek 都是服务端用）
+# 5. 部署完成，拿到 https://child-game-xxxx.edgeone.cool
 ```
 
-详细步骤在 `portfolio-project/docs/INTERVIEW.md` 之后会补充。
+> ⚠️ 放简历请用正式域名，不要放带 `?eo_token=...` 的预览链接（会过期）。详细步骤见 `README.md`「部署到 EdgeOne Pages」。
 
 ---
 

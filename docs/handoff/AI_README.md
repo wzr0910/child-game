@@ -13,7 +13,7 @@
 | **一句话** | 用尼采"孩子"哲学 + AI，让 20-30 岁奥德赛时期年轻人通过 3 轮对话重新发现自己"愿意"做的事 |
 | **用户** | 湖北大学哲学学院本科生（王梓睿/wzr0910），大三大四暑假，目标 AI 产品经理岗位 |
 | **当前进度** | 约 70% 完成。MVP 已跑通，P0 全部实现 |
-| **技术栈** | Next.js 14 + TypeScript + Tailwind + DeepSeek + Supabase（暂未接入）|
+| **技术栈** | Next.js 14 + TypeScript + Tailwind + DeepSeek + CloudBase（公共画廊，可选接入）|
 | **核心创新** | Co-Creation 机制（AI 给候选 → 用户选/改/命名 → 生成专属宣言卡片）|
 | **下一个人工** | P0 收尾（API 安全、门面、体验细节、作品集 README）|
 
@@ -77,7 +77,7 @@ portfolio-handoff/                 ← 你在这里
     │   │   ├── deepseek.ts        ← DeepSeek 客户端
     │   │   └── prompts.ts         ← 查拉图斯特拉 prompt
     │   ├── db/
-    │   │   └── supabase.ts        ← Supabase 客户端（暂未用）
+    │   │   └── cloudbase.ts        ← CloudBase 客户端（PG 模式，公共画廊用）
     │   └── utils/
     │       └── storage.ts         ← localStorage 工具
     │
@@ -95,7 +95,7 @@ portfolio-handoff/                 ← 你在这里
 | 首本经典 | 《查拉图斯特拉如是说》尼采 | 2026-08-09 |
 | 核心哲学 | 聚焦"孩子"阶段（不是骆驼/狮子）| 2026-08-09 |
 | AI 角色 | 查拉图斯特拉（B+C 风格：隐喻+挑衅）| 2026-08-09 |
-| 技术栈 | Next.js 14 + TS + Tailwind + DeepSeek + Supabase | 2026-08-10 |
+| 技术栈 | Next.js 14 + TS + Tailwind + DeepSeek + CloudBase | 2026-08-10 |
 | 核心机制 | Co-Creation（用户参与式生成）| 2026-08-09 |
 | 视觉风格 | 哲学主题（羊皮纸 + 墨色 + 金色）| 2026-08-10 |
 | 目标用户定位词 | "奥德赛时期" | 2026-08-09 |
@@ -137,8 +137,8 @@ portfolio-handoff/                 ← 你在这里
 - 移动端深度适配
 
 ### 🟢 待做（P2）
-- Supabase 数据持久化
-- 部署 Vercel
+- CloudBase 公共画廊接入（数据持久化）
+- 部署 EdgeOne Pages
 - AI 生图 API
 - 宣言画廊（UGC 闭环）
 
@@ -258,7 +258,7 @@ portfolio-handoff/                 ← 你在这里
 | 日期 | 里程碑 |
 |---|---|
 | 2026-08-09 | 项目启动，文档框架搭建，模拟面试 4 题完成 |
-| 2026-08-10 早 | 申请 DeepSeek + Supabase |
+| 2026-08-10 早 | 申请 DeepSeek + CloudBase |
 | 2026-08-10 晚 | 完整代码生成（24 个文件，~1970 行）|
 | 2026-08-10 22:00 | 项目本地跑通 |
 | 2026-08-10 22:54 | P0 全部实现（Co-Creation + 卡片 + 历史）|
@@ -270,7 +270,7 @@ portfolio-handoff/                 ← 你在这里
 ## 12. 联系方式
 
 - **用户**: 王梓睿 (wzr0910)
-- **邮箱**: 3304236052@qq.com（来自 Supabase owner 信息）
+- **邮箱**: 3304236052@qq.com
 - **目标**: 湖北本地 AI 产品经理 / 运营策划岗
 
 ---

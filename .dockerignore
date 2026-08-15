@@ -1,0 +1,18 @@
+# 不要打包进镜像/构建上下文的文件
+node_modules
+.next
+.git
+.session
+.vercel
+
+# 密钥文件（绝不进镜像）
+.env
+.env.*
+.env.local
+.env.local.example
+
+# 日志与缓存
+npm-debug.log*
+*.tsbuildinfo
+next-env.d.ts
+.DS_Store

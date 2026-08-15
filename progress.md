@@ -4,6 +4,13 @@
 
 ---
 
+> ## ⚠️ 文档更正（2026-08-12，最新）
+> 本文件部分历史段落写的是 **Supabase + Vercel**，但项目实际技术栈已变更：
+> - 数据库（公共画廊）：**腾讯云 CloudBase（PostgreSQL 模式）**，Supabase 已废弃（国内常不可达）。
+> - 部署：**腾讯云 EdgeOne Pages**（`*.edgeone.cool`），未使用 Vercel。
+> - 实际云端客户端文件为 `lib/db/cloudbase.ts`（非 `supabase.ts`）。
+> 下文带日期的历史段落为当时记录，以「最新更正」为准；正确技术栈详见 `架构.md` / `README.md`。
+
 ## 📅 2026-08-10 · Day 2 晚（重大里程碑）
 
 ### ✅ 今日完成
@@ -17,13 +24,13 @@
 
 ### 🚧 进行中
 - **P1**: 错误处理、加载状态优化、手机端适配
-- **P2**: 接入Supabase、部署到Vercel
+- **P2**: 接入 CloudBase 公共画廊、部署到 EdgeOne Pages
 
 ### 📝 下一步待办
 - [ ] 用户体验 P0 全流程，反馈问题
 - [ ] 修复体验中的 bug
 - [ ] P1: 错误处理 + 加载优化
-- [ ] P2: Supabase 接入 + Vercel 部署
+- [ ] P2: CloudBase 接入 + EdgeOne 部署
 - [ ] 撰写作品集文案
 
 ### 💡 关键决策记录
@@ -80,7 +87,7 @@
 
 ### 待落地
 - ⏳ P1：错误处理、加载优化、手机适配
-- ⏳ P2：Supabase 数据持久化、Vercel 部署
+- ⏳ P2：CloudBase 公共画廊、EdgeOne Pages 部署
 
 ---
 
@@ -137,22 +144,22 @@
 
 ---
 
-## 📅 2026-08-11 · P2 公共画廊接入（Supabase）
+## 📅 2026-08-11 · P2 公共画廊接入（实际走 CloudBase，Supabase 已废弃）
 
 ### ✅ 本次完成（代码已落地，构建+类型检查通过）
 - ✅ 新建 `lib/db/declarations.ts`：云端读写封装
   - `saveDeclarationRemote()` 匿名写入（只存 4 个公开字段，无身份）
   - `listDeclarationsRemote()` 公开只读，失败返回空数组不阻断页面
   - `isRemoteGalleryEnabled` 降级开关：未配置时静默走本地
-- ✅ 补全 `lib/db/supabase.ts` 建表 SQL：新增匿名 `insert` 策略
+- ✅ 补全 `lib/db/cloudbase.ts` 建表 SQL：新增匿名 `insert` 策略
   （表结构本身无 user_id/邮箱/IP，天然不泄露身份）
 - ✅ `components/ChatWindow.tsx`：定稿时同步写云端（fire-and-forget，失败不影响本地）
 - ✅ 新建 `components/PublicGallery.tsx`：公共画廊区（未配置/空/加载三态）
 - ✅ 改造 `app/gallery/page.tsx`：标题改「宣言画廊」，上「我的宣言」下「公共画廊」
 
-### ⏳ 待用户人工完成（需 Supabase 凭据，无法在沙箱自动执行）
-- [ ] 在 Supabase SQL Editor 执行建表 SQL（见 lib/db/supabase.ts 注释）
-- [ ] 在 `.env.local` 填入真实 `NEXT_PUBLIC_SUPABASE_URL` + `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+### ⏳ 待用户人工完成（需 CloudBase 凭据，无法在沙箱自动执行）
+- [ ] 在 CloudBase 控制台「数据库 → SQL 执行」建表（见 lib/db/cloudbase.ts 注释 / README「接入 CloudBase 公共画廊」）
+- [ ] 在 `.env.local` 填入真实 `CLOUDBASE_ENV_ID` + `CLOUDBASE_PUBLISHABLE_KEY`
   （注意：`.env.local.example` 里的 anon key 是截断占位符，必须换成完整真实值）
 - [ ] 跑 `npm run dev` 验证公共画廊能读写
 
@@ -162,7 +169,7 @@
 - 唯一报错为沙箱回收站清理 `.next/export` 失败，属环境权限问题，与代码无关
 
 ### 🔥 当前卡点
-- 等用户填 Supabase 环境变量 + 建表后，公共画廊才真正联通
+- 等用户填 CloudBase 环境变量 + 建表后，公共画廊才真正联通
 
 ---
 
@@ -170,8 +177,8 @@
 
 ### ✅ 本次完成
 - ✅ 重写 `README.md`：从过时 v0.1 改为「孩子的游戏」产品定位
-  - 新增：本地运行、环境变量表、Supabase 公共画廊接入（建表 SQL + 填变量）、Vercel 部署流程
-  - Vercel 部分含「初始化 git → 推 GitHub → 导入 Vercel」完整路径（项目当前非 git 仓库）+ CLI 备选
+  - 新增：本地运行、环境变量表、CloudBase 公共画廊接入（建表 SQL + 填变量）、EdgeOne Pages 部署流程
+  - EdgeOne Pages 部分含「初始化 git → 推 GitHub → 导入 EdgeOne」完整路径（项目当前非 git 仓库）+ CLI 备选
 - ✅ 修正 `docs/SETUP.md`：anon key 必须填 Supabase 后台完整 key（example 里是截断占位符不可用）；指向 README 部署章节
 
 ### 🧪 验证

@@ -86,8 +86,8 @@
 6. 移动端深度适配
 
 🟢 P2 - 锦上添花:
-7. Supabase 接入（用户系统）
-8. 部署 Vercel
+7. CloudBase 公共画廊接入
+8. 部署 EdgeOne Pages
 9. AI 生图
 10. 宣言画廊
 ```

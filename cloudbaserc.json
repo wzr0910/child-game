@@ -1,0 +1,18 @@
+{
+  "envId": "child-game-d4gxbdz4zce7a5c3b",
+  "functionRoot": "cloudbase-fn",
+  "functions": [
+    {
+      "name": "child-game",
+      "runtime": "Nodejs20.19",
+      "handler": "scf_bootstrap",
+      "memorySize": 512,
+      "timeout": 60,
+      "installDependency": false,
+      "envVariables": {
+        "NODE_ENV": "production",
+        "PORT": "9000"
+      }
+    }
+  ]
+}

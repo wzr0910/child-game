@@ -2,12 +2,12 @@
  * 宣言画廊存储（本地版）
  *
  * 设计取舍说明：
- * PRD 里画廊是 UGC 闭环，规划用 Supabase 做公共画廊。
- * 但 Supabase 需要 service_role key + 建表，属于人工步骤，
+ * PRD 里画廊是 UGC 闭环，规划用 CloudBase 做公共画廊。
+ * 但 CloudBase 需要建表 + 密钥，属于人工步骤，
  * 在那之前画廊页会一直是空壳。
  *
  * 所以这一版先落地"我的宣言"——存在本地，用户自己看得见收藏。
- * 数据结构与后续 Supabase 的 declarations 表字段保持一致
+ * 数据结构与后续 CloudBase 的 declarations 表字段保持一致
  * （declaration_text / card_name / card_style / created_at），
  * 将来接云端只需要换 lib/db 的数据源，页面和组件一行不用改。
  */
