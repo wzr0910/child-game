@@ -2,17 +2,17 @@ import type { ChatStage } from "./prompts";
 
 export type ClientChatMessage = { role: "user" | "assistant"; content: string };
 
+export type ChatReply = { message: string; isDemo: boolean };
+export type CandidatesReply = { candidates: { id: number; style: string; text: string }[]; isDemo: boolean };
+
 /**
  * 前端 AI 调用：走服务端 API 路由
- *
- * Vercel 部署版：前端 fetch /api/chat，服务端路由调 DeepSeek。
- * API key 在服务端环境变量里，不暴露给浏览器。
  */
 
 export async function getChatReply(
   stage: ChatStage,
   messages: ClientChatMessage[]
-): Promise<string> {
+): Promise<ChatReply> {
   const res = await fetch("/api/chat", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -25,12 +25,12 @@ export async function getChatReply(
   }
 
   const data = await res.json();
-  return data.message;
+  return { message: data.message, isDemo: !!data.demo };
 }
 
 export async function generateCandidates(
   messages: ClientChatMessage[]
-): Promise<{ id: number; style: string; text: string }[]> {
+): Promise<CandidatesReply> {
   const res = await fetch("/api/generate-candidates", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -43,5 +43,5 @@ export async function generateCandidates(
   }
 
   const data = await res.json();
-  return data.candidates;
+  return { candidates: data.candidates, isDemo: !!data.demo };
 }

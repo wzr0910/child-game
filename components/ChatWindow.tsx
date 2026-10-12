@@ -149,11 +149,11 @@ export function ChatWindow() {
       setStep(3);
 
       try {
-      const list: Candidate[] = await aiGenerateCandidates(allMessages);
+      const { candidates: list, isDemo: demoFlag } = await aiGenerateCandidates(allMessages);
       if (list.length === 0) throw new Error("宣言铸造失败了，请重试");
 
       setCandidates(list);
-      setIsDemo(true);
+      setIsDemo(demoFlag);
       setStep(4);
       } catch (err) {
         console.error(err);
@@ -173,9 +173,9 @@ export function ChatWindow() {
   const requestGreeting = useCallback(async () => {
     setLoading(true);
     try {
-      const message = await getChatReply("greet", []);
+      const { message, isDemo: demoFlag } = await getChatReply("greet", []);
       setMessages([{ role: "assistant", content: message }]);
-      setIsDemo(true);
+      setIsDemo(demoFlag);
     } catch (err) {
       console.error(err);
       greetedRef.current = false; // 允许用户重试
@@ -232,13 +232,13 @@ export function ChatWindow() {
     setLoading(true);
 
     try {
-      const message = await getChatReply(step as ConversationStep, newMessages);
+      const { message, isDemo: demoFlag } = await getChatReply(step as ConversationStep, newMessages);
       const withReply: ChatMessage[] = [
         ...newMessages,
         { role: "assistant", content: message },
       ];
       setMessages(withReply);
-      setIsDemo(true);
+      setIsDemo(demoFlag);
 
       if (step < 2) {
         setStep(step + 1);

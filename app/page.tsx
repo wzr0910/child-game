@@ -35,15 +35,6 @@ export default function Home() {
         </p>
         <p className="text-sm text-ink/40 mb-10">—— 尼采</p>
 
-        {/* 演示模式：清晰但克制，不再容易被一眼略过 */}
-        <div className="demo-callout mx-auto max-w-xl mb-10 text-left">
-          <span className="demo-badge">演示模式</span>
-          <p className="text-sm text-ink/75 leading-relaxed">
-            当前线上版本的 AI 回复为预置话术，用于完整展示产品闭环；架构已支持接入
-            DeepSeek 真实模型，填入密钥即可切换。
-          </p>
-        </div>
-
         <Link href="/chat" className="btn-primary text-lg">
           和查拉图斯特拉对话 →
         </Link>

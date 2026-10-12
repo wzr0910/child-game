@@ -72,17 +72,6 @@ export default function AboutPage() {
           </p>
         </section>
 
-        {/* 当前线上版本说明（给面试官看的诚实声明） */}
-        <section className="mb-8">
-          <div className="demo-callout">
-            <span className="demo-badge">演示模式</span>
-            <p className="text-sm text-ink/75 leading-relaxed">
-              <strong className="text-ink">当前线上版本说明：</strong>
-              本作品集部署的是纯前端演示版，AI 对话采用预置话术（演示模式），用于完整展示产品闭环；真实模型接入（DeepSeek）的代码已保留，填入密钥即可切换。下方「关键决策」记录了完整的技术取舍。
-            </p>
-          </div>
-        </section>
-
         {/* 决策复盘 */}
         <section className="mb-10">
           <h2 className="eyebrow mb-5">
