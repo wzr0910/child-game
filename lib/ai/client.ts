@@ -1,34 +1,47 @@
-"use client";
-
-import { getDemoReply, DEMO_CANDIDATES, demoDelay } from "./fallback";
 import type { ChatStage } from "./prompts";
 
 export type ClientChatMessage = { role: "user" | "assistant"; content: string };
 
 /**
- * 纯前端 AI 调用（GitHub Pages 静态部署版）
+ * 前端 AI 调用：走服务端 API 路由
  *
- * 孩子的游戏现在托管在 GitHub Pages——它是纯静态站点，没有服务端，
- * 所以不再走 /api/chat、/api/generate-candidates 这类服务端接口。
- *
- * 默认走「演示模式」：直接用预置的尼采风格回复（见 lib/ai/fallback.ts），
- * 全流程完整、不需要任何 key、也不会因为缺后端而白屏或报错。
- *
- * 将来若想启用真 AI：在这里读取用户填的 DeepSeek key，
- * 用 OpenAI SDK 浏览器直连 DeepSeek 即可，下面两个函数的调用签名保持不变。
+ * Vercel 部署版：前端 fetch /api/chat，服务端路由调 DeepSeek。
+ * API key 在服务端环境变量里，不暴露给浏览器。
  */
 
 export async function getChatReply(
   stage: ChatStage,
-  _messages: ClientChatMessage[]
+  messages: ClientChatMessage[]
 ): Promise<string> {
-  await demoDelay();
-  return getDemoReply(stage);
+  const res = await fetch("/api/chat", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ stage, messages }),
+  });
+
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}));
+    throw new Error(err.error || "查拉图斯特拉没有回应，请重试");
+  }
+
+  const data = await res.json();
+  return data.message;
 }
 
 export async function generateCandidates(
-  _messages: ClientChatMessage[]
+  messages: ClientChatMessage[]
 ): Promise<{ id: number; style: string; text: string }[]> {
-  await demoDelay(700);
-  return DEMO_CANDIDATES.map((c) => ({ id: c.id, style: c.style, text: c.text }));
+  const res = await fetch("/api/generate-candidates", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ messages }),
+  });
+
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}));
+    throw new Error(err.error || "宣言铸造失败，请重试");
+  }
+
+  const data = await res.json();
+  return data.candidates;
 }
