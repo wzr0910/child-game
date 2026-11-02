@@ -6,29 +6,62 @@ import type { ChatStage } from "./prompts";
 export type ClientChatMessage = { role: "user" | "assistant"; content: string };
 
 /**
- * 纯前端 AI 调用（GitHub Pages 静态部署版）
+ * AI 调用层
  *
- * 孩子的游戏现在托管在 GitHub Pages——它是纯静态站点，没有服务端，
- * 所以不再走 /api/chat、/api/generate-candidates 这类服务端接口。
- *
- * 默认走「演示模式」：直接用预置的尼采风格回复（见 lib/ai/fallback.ts），
- * 全流程完整、不需要任何 key、也不会因为缺后端而白屏或报错。
- *
- * 将来若想启用真 AI：在这里读取用户填的 DeepSeek key，
- * 用 OpenAI SDK 浏览器直连 DeepSeek 即可，下面两个函数的调用签名保持不变。
+ * 本地开发（npm run dev）：走 Next.js API 路由 → DeepSeek 真AI
+ * GitHub Pages 线上（纯静态）：API 路由不存在 → 自动 fallback 到演示模式
  */
+
+async function tryAPIChat(
+  stage: ChatStage,
+  messages: ClientChatMessage[]
+): Promise<string | null> {
+  try {
+    const res = await fetch("/api/chat", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ stage, messages }),
+    });
+    if (!res.ok) return null;
+    const data = await res.json();
+    return data.reply || null;
+  } catch {
+    return null;
+  }
+}
+
+async function tryAPICandidates(
+  messages: ClientChatMessage[]
+): Promise<{ id: number; style: string; text: string }[] | null> {
+  try {
+    const res = await fetch("/api/candidates", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ messages }),
+    });
+    if (!res.ok) return null;
+    const data = await res.json();
+    return data.candidates || null;
+  } catch {
+    return null;
+  }
+}
 
 export async function getChatReply(
   stage: ChatStage,
-  _messages: ClientChatMessage[]
+  messages: ClientChatMessage[]
 ): Promise<string> {
+  const real = await tryAPIChat(stage, messages);
+  if (real) return real;
   await demoDelay();
   return getDemoReply(stage);
 }
 
 export async function generateCandidates(
-  _messages: ClientChatMessage[]
+  messages: ClientChatMessage[]
 ): Promise<{ id: number; style: string; text: string }[]> {
+  const real = await tryAPICandidates(messages);
+  if (real && real.length > 0) return real;
   await demoDelay(700);
   return DEMO_CANDIDATES.map((c) => ({ id: c.id, style: c.style, text: c.text }));
 }
