@@ -50,18 +50,18 @@ async function tryAPICandidates(
 export async function getChatReply(
   stage: ChatStage,
   messages: ClientChatMessage[]
-): Promise<string> {
+): Promise<{ message: string; isDemo: boolean }> {
   const real = await tryAPIChat(stage, messages);
-  if (real) return real;
+  if (real) return { message: real, isDemo: false };
   await demoDelay();
-  return getDemoReply(stage);
+  return { message: getDemoReply(stage), isDemo: true };
 }
 
 export async function generateCandidates(
   messages: ClientChatMessage[]
-): Promise<{ id: number; style: string; text: string }[]> {
+): Promise<{ candidates: { id: number; style: string; text: string }[]; isDemo: boolean }> {
   const real = await tryAPICandidates(messages);
-  if (real && real.length > 0) return real;
+  if (real && real.length > 0) return { candidates: real, isDemo: false };
   await demoDelay(700);
-  return DEMO_CANDIDATES.map((c) => ({ id: c.id, style: c.style, text: c.text }));
+  return { candidates: DEMO_CANDIDATES.map((c) => ({ id: c.id, style: c.style, text: c.text })), isDemo: true };
 }
