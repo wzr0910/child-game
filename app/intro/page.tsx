@@ -124,19 +124,7 @@ export default function IntroPage() {
 
         {/* 诚实说明 */}
         <section className="mb-10">
-          <h2 className="eyebrow mb-5">
-            当前版本说明
-          </h2>
-          <div className="demo-callout">
-            <span className="demo-badge">演示模式</span>
-            <p className="text-sm text-ink/75 leading-relaxed">
-              <strong className="text-ink">当前线上版本说明：</strong>
-              本作品集部署的是纯前端演示版，AI 对话采用预置话术（演示模式），用于完整展示产品闭环；真实模型接入（DeepSeek）的代码已保留，填入密钥即可切换。
-            </p>
-          </div>
-        </section>
-
-        <div className="text-center space-y-3">
+          <div className="text-center space-y-3">
           <Link
             href="/chat"
             className="btn-primary"
@@ -152,6 +140,7 @@ export default function IntroPage() {
             </Link>
           </div>
         </div>
+        </section>
       </div>
     </main>
   );
